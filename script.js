@@ -90,11 +90,11 @@ $("#find_recipe").on("click", function(event) {
       console.log(settings);
       $(".img").html(`
 
-      <h5>${response.length}</h5>
+      
       ${response.map(function(list){
        return `
-       <div class="ingredients">
-       <h6>${list.title}</h6>
+       <div class="title">
+       <button class=${list.id}>${list.title}</button>
        
        
          
@@ -121,10 +121,14 @@ $("#find_recipe").on("click", function(event) {
  
       
       `);
+      $("button").on("click",function(event_2){
+        event_2.preventDefault();
+        titleValue = $(this).attr('class')
+      
       var summary = {
         "async": true,
         "crossDomain": true,
-        "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" + response[0].id+ "/analyzedInstructions?stepBreakdown=false",
+        "url": "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/" +titleValue+ "/information",
         "method": "GET",
         "headers": {
           "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -139,10 +143,10 @@ $("#find_recipe").on("click", function(event) {
       console.log(response2)
       window.response2 = response2;
       console.log(summary)
-      $("#instruc").html(` <h5>${response2.length}</h5>
-      ${response2[0].steps.map(function(step){
+      $("#instruc").html(` 
+      ${response2.analyzedInstructions[0].steps.map(function(step){
        return `
-       <div class="ingredients">
+       <div class="">
        <h6>${step.number}</h6><h6>${step.step}</h6>
        
          
@@ -153,10 +157,17 @@ $("#find_recipe").on("click", function(event) {
  
       
       `);
+      $('#ingredients').html(`
+      ${response2.extendedIngredients.map(function(ingr){
+        return `
+        <h6>${ingr.original}</h6>
+        `
+      }).join('')}
       
+      `)
      
     });
-  
+      });
 });
 $.ajax(settings).then(function (response) {
   // console.log(response);
