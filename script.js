@@ -1,4 +1,12 @@
-
+// Geographical location
+  navigator.geolocation.getCurrentPosition(function (position){
+    // console.log(position);
+    // console.log(position.coords.latitude);
+    window.latitude = (position.coords.latitude); 
+    window.longitude = (position.coords.longitude);
+    console.log(window.longitude)
+  });
+  
   // Sidenav
   var sideNav = document.querySelector('.sidenav');
   M.Sidenav.init(sideNav, {});
@@ -202,3 +210,134 @@ $.ajax(settings).done(function (response) {
 });
 
 });
+
+
+// Google Map Div
+
+var map;
+var location_flag;  // name of grocery store
+
+$("#HEB-button").on("click", function initialize (){
+  var center = new google.maps.LatLng(window.latitude, window.longitude); //Austin
+  console.log("hi")
+  map = new google.maps.Map(document.getElementById('map'),{
+      center: center,
+      zoom: 11,
+  });
+  // Use google Places API to get list of grocery stores
+  var request = {             // google requ-est to find desired place
+      location: center,
+      radius: 26100, // ~10 mile radius
+      // types: ['supermarket'],
+      name:['H-E-B'],
+      // name:['HEB', 'Whole Foods', 'Trader Joes', 'Wheatsville Food Co-op','Sprouts Farmers Market','Natural Grocers','Royal Blue Grocery','Central Market','Avenue B Grocery & Market'],
+  };
+
+  location_flag =  new google.maps.InfoWindow();  // open info window on google map
+  var service = new google.maps.places.PlacesService(map); // request search based on request obj
+  service.nearbySearch(request, callback);
+});
+
+$("#WholeFoods-button").on("click", function initialize (){
+var center = new google.maps.LatLng(window.latitude, window.longitude); //Austin
+map = new google.maps.Map(document.getElementById('map'),{
+    center: center,
+    zoom: 10,
+});
+// Use google Places API to get list of grocery stores
+var request = {             // google requ-est to find desired place
+    location: center,
+    radius: 26100, // ~10 mile radius
+    types: ['supermarket'],
+    name:['Whole Foods Market'],
+    // name:['HEB', 'Whole Foods', 'Trader Joes', 'Wheatsville Food Co-op','Sprouts Farmers Market','Natural Grocers','Royal Blue Grocery','Central Market','Avenue B Grocery & Market'],
+};
+
+location_flag =  new google.maps.InfoWindow();  // open info window on google map
+var service = new google.maps.places.PlacesService(map); // request search based on request obj
+service.nearbySearch(request, callback);
+});
+
+$("#T-button").on("click", function initialize (){
+  var center = new google.maps.LatLng(window.latitude, window.longitude); //Austin
+  map = new google.maps.Map(document.getElementById('map'),{
+      center: center,
+      zoom: 10,
+  });
+  // Use google Places API to get list of grocery stores
+  var request = {             // google requ-est to find desired place
+      location: center,
+      radius: 26100, // ~10 mile radius
+      // types: ['supermarket'],
+      name:['trader joes'],
+      // name:['HEB', 'Whole Foods', 'Trader Joes', 'Wheatsville Food Co-op','Sprouts Farmers Market','Natural Grocers','Royal Blue Grocery','Central Market','Avenue B Grocery & Market'],
+  };
+  
+  location_flag =  new google.maps.InfoWindow();  // open info window on google map
+  var service = new google.maps.places.PlacesService(map); // request search based on request obj
+  service.nearbySearch(request, callback);
+  });
+
+
+$("#F-button").on("click", function initialize (){
+  var center = new google.maps.LatLng(window.latitude, window.longitude); //Austin
+  map = new google.maps.Map(document.getElementById('map'),{
+      center: center,
+      zoom: 10,
+  });
+  // Use google Places API to get list of grocery stores
+  var request = {             // google requ-est to find desired place
+      location: center,
+      radius: 26100, // ~10 mile radius
+      // types: ['supermarket'],
+      name:['fiesta mart'],
+      // name:['HEB', 'Whole Foods', 'Trader Joes', 'Wheatsville Food Co-op','Sprouts Farmers Market','Natural Grocers','Royal Blue Grocery','Central Market','Avenue B Grocery & Market'],
+  };
+  
+  location_flag =  new google.maps.InfoWindow();  // open info window on google map
+  var service = new google.maps.places.PlacesService(map); // request search based on request obj
+  service.nearbySearch(request, callback);
+  });
+
+  $("#S-button").on("click", function initialize (){
+    var center = new google.maps.LatLng(window.latitude, window.longitude); //Austin
+    map = new google.maps.Map(document.getElementById('map'),{
+        center: center,
+        zoom: 10,
+    });
+    // Use google Places API to get list of grocery stores
+    var request = {             // google requ-est to find desired place
+        location: center,
+        radius: 26100, // ~10 mile radius
+        // types: ['supermarket'],
+        name:['Sprouts Farmers Market'],
+        // name:['HEB', 'Whole Foods', 'Trader Joes', 'Wheatsville Food Co-op','Sprouts Farmers Market','Natural Grocers','Royal Blue Grocery','Central Market','Avenue B Grocery & Market'],
+    };
+    
+    location_flag =  new google.maps.InfoWindow();  // open info window on google map
+    var service = new google.maps.places.PlacesService(map); // request search based on request obj
+    service.nearbySearch(request, callback);
+    });
+
+
+function callback(results, status){         // checks for legit response and servor errors
+  if(status == google.maps.places.PlacesServiceStatus.OK){
+    console.log("HERE")
+      for (var i =0; i < results.length; i++){        // gets all grocery-store locations
+          createMarker(results[i]);                   // adds to array 'results'
+      }
+  }
+}
+
+function createMarker(place){     // create red markers in map based on resulst from callback function
+  var placeLoc = place.geometry.location;
+  var marker = new google.maps.Marker({
+      map: map,
+      position: place.geometry.location
+  });
+
+  google.maps.event.addListener(marker, 'click', function(){
+      location_flag.setContent(place.name);
+      location_flag.open(map, this);
+  })
+}
