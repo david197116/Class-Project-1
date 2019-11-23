@@ -80,11 +80,18 @@
         <div class="col s12 blue-text">
           <h3>Search Recipes</h3>
           <div class="input-field">
-            <input type="text" class="white blue-text autocomplete" id="search-item" placeholder="Chicken, Rice, Cilantro, etc...">
+            <input type="text" class="white blue-text autocomplete" id="search-item"
+              placeholder="Chicken, Rice, Cilantro, etc...">
             <div class="button">
-                <a class="btn-floating btn-large waves-effect waves-light red" id="add_ingredients"><i class="material-icons">add</i></a><span>  Add to Ingedients List</span>
+              <a class="btn-floating btn-large waves-effect waves-light red" id="add_ingredients"><i
+                  class="material-icons">add</i></a><span> Add to Ingedients List</span>
+
+              <a class="btn-floating btn-large waves-effect waves-light blue" id="add_d-ingredients"><i
+                  class="material-icons">add</i></a><span> Choose a Drink Ingredient</span>
             </div>
+
           </div>
+
         </div>
       </div>
     </div>
@@ -98,7 +105,7 @@
           <div class="card-panel">
             <i class="material-icons large teal-text">add_shopping_cart</i>
             <h5 class="blue-text">Ingredients Available</h5>
-            <h6 id="list" ></h6>
+            <h6 id="list"></h6>
             <a class="btn waves-effect waves-light btn-small" id="find_recipe">Find Recipes</a>
           </div>
         </div>
@@ -106,16 +113,16 @@
           <div class="card-panel">
             <i class="material-icons large teal-text">block</i>
             <h5 class="blue-text">Dietary Restrictions</h5>
-            <h6 id="list_dietaryRest" >TBD</h6>
+            <h6 id="list_dietaryRest">TBD</h6>
             <a class="btn waves-effect waves-light btn-small" id="find_recipe">Find Recipes</a>
           </div>
         </div>
         <div class="col s12 m4">
           <div class="card-panel">
-            <i class="material-icons large teal-text">restaurant</i>
-            <h5 class="blue-text">Servings</h5>
-            <h6 id="list_servings" >TBD</h6>
-            <a class="btn waves-effect waves-light btn-small" id="find_recipe">Find Recipes</a>
+            <i class="material-icons large teal-text">local_bar</i>
+            <h5 class="blue-text">Drinks</h5>
+            <h6 id="d-list"></h6>
+            <a class="btn waves-effect waves-light btn-small" id="find_d-recipe">Find Recipes</a>
           </div>
         </div>
       </div>
@@ -158,8 +165,29 @@
               <img src="img/comida.jpg" alt="">
             </div>
             <div class="card-content">
-                <h6 class="card-title center">Cooking Instructions</h6>  
-                <h6 id="instruc">TBD</h6>            </div>
+              <h6 class="card-title center">Cooking Instructions</h6>
+              <h6 id="">TBD</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-image">
+              <img src="img/comida.jpg" alt="">
+            </div>
+            <div class="card-content" id="drink-recipe-list">
+              <h6 class="card-title center">Drink List</h6>
+              <h6 id="drink_recipe0"></h6>
+              <h6 id="drink_recipe1"></h6>
+              <h6 id="drink_recipe2"></h6>
+              <h6 id="drink_recipe3"></h6>
+              <h6 id="drink_recipe4"></h6>
+              <h6 id="drink_recipe5"></h6>
+              <h6 id="drink_recipe6"></h6>
+              <h6 id="drink_recipe7"></h6>
+              <h6 id="drink_recipe8"></h6>
+              <h6 id="drink_recipe9"></h6>
+            </div>
           </div>
         </div>
       </div>
@@ -191,10 +219,10 @@
   </section>
 
   <!-- Section: Photo Gallery -->
-  <section id="gallery" class="section section-gallery scrollspy" >
-    <div class="container" id="img2">
+  <section id="gallery" class="section section-gallery scrollspy">
+    <div class="container">
       <h4 class="center">
-        <span class="blue-text" >Photo</span> Gallery
+        <span class="blue-text">Photo</span> Gallery
       </h4>
       <div class="row">
         <div class="col s12 m3">
